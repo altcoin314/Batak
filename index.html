@@ -241,28 +241,28 @@
     let piInitialized = false;
     let myUserName = "Sen (Pi Oyuncusu)";
 
-    const SUITS = [
+    const SUITS = new Array(
       { id: 'S', symbol: '♠', name: 'Maça', color: 'black' },
       { id: 'H', symbol: '♥', name: 'Kupa', color: 'red' },
       { id: 'C', symbol: '♣', name: 'Sinek', color: 'black' },
       { id: 'D', symbol: '♦', name: 'Karo', color: 'red' }
-    ];
-    const RANKS = [
+    );
+    const RANKS = new Array(
       { v: 2, label: '2' }, { v: 3, label: '3' }, { v: 4, label: '4' },
       { v: 5, label: '5' }, { v: 6, label: '6' }, { v: 7, label: '7' },
       { v: 8, label: '8' }, { v: 9, label: '9' }, { v: 10, label: '10' },
       { v: 11, label: 'J' }, { v: 12, label: 'Q' }, { v: 13, label: 'K' },
       { v: 14, label: 'A' }
-    ];
+    );
 
     let gameMode = 'SINGLE';
     let onlineChannel = null;
     let mySeatIndex = 0;
 
-    let players = [];
+    let players = new Array();
     let trumpSuit = 'S';
     let currentTurn = 0;
-    let trickCards = [];
+    let trickCards = new Array();
     let gameState = 'IDLE';
     let highestBid = 4;
     let bidderIndex = -1;
@@ -277,7 +277,7 @@
     async function authenticatePiUser() {
       try {
         await initPiSdk();
-        const auth = await window.Pi.authenticate(['username'], () => {});
+        const auth = await window.Pi.authenticate(new Array('username'), function() {});
         const res = await fetch("https://piappengine.com", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -290,8 +290,8 @@
         myUserName = `@${piUser.username}`;
         document.getElementById("piLoginBtn").innerText = myUserName;
         document.getElementById("piLoginBtn").disabled = true;
-        if (players[mySeatIndex]) {
-          players[mySeatIndex].name = myUserName;
+        if (players.at(mySeatIndex)) {
+          players.at(mySeatIndex).name = myUserName;
           renderPlayers();
         }
       } catch (err) {
@@ -316,4 +316,3 @@
           document.getElementById("tokenBalance").innerText = tokens;
           alert("Reklam tamamlandı! +5 BTK Token kazandınız.");
         }
-      } catch (err) {
