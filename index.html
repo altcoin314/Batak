@@ -1,3 +1,24 @@
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  window.addEventListener("load", async () => {
+    try {
+      await window.Pi.init({ version: "2.0" });
+      const auth = await window.Pi.authenticate(["username"], (payment) => {
+        console.log("Incomplete payment:", payment);
+      });
+      const res = await fetch("https://backend.appstudio-u7cm9zhmha0ruwv8.piappengine.com/pi/auth/v1/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accessToken: auth.accessToken })
+      });
+      const session = await res.json();
+      window.piSession = session;
+      console.log("Pi App Studio Auth Success:", session.user);
+    } catch (err) {
+      console.error("Pi Auth Error:", err);
+    }
+  });
+</script>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
