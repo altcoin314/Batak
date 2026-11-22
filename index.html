@@ -3,316 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>-100 Batak | Pi Network DApp</title>
+  <title>-100 Batak | Pi DApp</title>
   <script src="https://minepi.com"></script>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #1a1025;
-      color: #ffffff;
-      text-align: center;
-      margin: 0;
-      padding: 12px;
-      user-select: none;
-    }
-    .header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      background: #2b193d;
-      padding: 10px 16px;
-      border-radius: 12px;
-      border: 1px solid #59357a;
-      margin-bottom: 14px;
-      gap: 8px;
-    }
-    .btn {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 3px;
-      font-size: 13px;
-    }
-    .btn:disabled { background: #555 !important; color: #aaa !important; cursor: not-allowed; }
-    .btn-pi { background: #f4b41a; color: #1a1025; }
-    .btn-ad { background: #00c853; color: white; }
-    .btn-online { background: #00b0ff; color: #1a1025; }
-    .btn-danger { background: #e53935; color: white; }
-
-    .menu-box {
-      background: #2b193d;
-      border: 1px solid #59357a;
-      border-radius: 14px;
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 24px 16px;
-    }
-    .mode-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .mode-card {
-      background: #1f122d;
-      border: 2px solid #59357a;
-      border-radius: 12px;
-      padding: 18px;
-    }
-    .room-input {
-      padding: 9px;
-      border-radius: 8px;
-      border: 1px solid #59357a;
-      background: #140b1e;
-      color: #fff;
-      width: 150px;
-      text-align: center;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-
-    .scoreboard {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      max-width: 720px;
-      margin: 0 auto 14px auto;
-    }
-    .player-card {
-      background: #252525;
-      padding: 10px;
-      border-radius: 10px;
-      border: 2px solid #444;
-      transition: all 0.3s ease;
-    }
-    .player-card h3 { margin: 2px 0; font-size: 14px; }
-    .player-card h2 { margin: 4px 0; font-size: 17px; }
-    .player-card p { margin: 2px 0; font-size: 12px; }
-    .active-turn { box-shadow: 0 0 14px #f4b41a; transform: scale(1.02); }
-
-    .rank-100 { background-color: #b71c1c !important; border-color: #ff5252; }
-    .rank-50 { background-color: #fbc02d !important; color: #000 !important; }
-    .rank-under50 { background-color: #0277bd !important; border-color: #4fc3f7; }
-
-    .game-arena {
-      background: #143d26;
-      border: 2px solid #2e7d32;
-      border-radius: 14px;
-      max-width: 720px;
-      margin: 0 auto 14px auto;
-      padding: 14px;
-      min-height: 215px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .status-bar {
-      background: rgba(0,0,0,0.5);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #ffd54f;
-      margin-bottom: 10px;
-    }
-    .trick-table {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      min-height: 110px;
-      flex-wrap: wrap;
-    }
-    .played-slot {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 11px;
-      color: #c8e6c9;
-    }
-    .card {
-      width: 54px;
-      height: 80px;
-      background: #ffffff;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 17px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-      border: 1px solid #ccc;
-    }
-    .card.red { color: #d32f2f; }
-    .card.black { color: #111111; }
-
-    .hand-area {
-      max-width: 720px;
-      margin: 0 auto;
-      background: #2b193d;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #59357a;
-    }
-    .my-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .my-cards .card {
-      cursor: pointer;
-      transition: transform 0.15s;
-    }
-    .my-cards .card:hover {
-      transform: translateY(-8px);
-      border-color: #f4b41a;
-    }
-    .my-cards .card.disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      transform: none;
-    }
+    *{box-sizing:border-box}
+    body{font-family:sans-serif;background:#1a1025;color:#fff;text-align:center;margin:0;padding:10px;user-select:none}
+    .box{background:#2b193d;border:1px solid #59357a;border-radius:12px;padding:12px;max-width:650px;margin:0 auto 12px}
+    .btn{padding:10px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;margin:3px;font-size:13px}
+    .btn:disabled{background:#555!important;color:#aaa!important}
+    .b-pi{background:#f4b41a;color:#1a1025} .b-ad{background:#00c853;color:#fff} .b-on{background:#00b0ff;color:#1a1025} .b-red{background:#e53935;color:#fff}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:650px;margin:0 auto 12px}
+    .p-card{background:#252525;padding:8px;border-radius:10px;border:2px solid #444}
+    .turn{box-shadow:0 0 12px #f4b41a}
+    .r100{background:#b71c1c!important;border-color:#ff5252} .r50{background:#fbc02d!important;color:#000!important} .ru50{background:#0277bd!important;border-color:#4fc3f7}
+    .arena{background:#143d26;border:2px solid #2e7d32;border-radius:12px;max-width:650px;margin:0 auto 12px;padding:12px;min-height:190px}
+    .status{background:rgba(0,0,0,.5);padding:8px;border-radius:8px;font-size:13px;font-weight:bold;color:#ffd54f;margin-bottom:10px}
+    .table{display:flex;justify-content:center;gap:10px;min-height:100px;flex-wrap:wrap}
+    .cards{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:8px}
+    .card{width:50px;height:74px;background:#fff;border-radius:7px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-weight:bold;font-size:16px;color:#111;cursor:pointer}
+    .card.red{color:#d32f2f} .card.dis{opacity:.4;cursor:not-allowed}
+    input{padding:9px;border-radius:8px;border:1px solid #59357a;background:#140b1e;color:#fff;width:130px;text-align:center}
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <div><strong>🃏 -100 BATAK (Pi DApp)</strong></div>
+  <div class="box" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+    <strong>🃏 -100 BATAK</strong>
     <div>
-      <span>Token: <strong id="tokenBalance">10</strong> BTK</span>
-      <button class="btn btn-ad" id="adBtn" onclick="watchPiRewardedAd()">📺 Reklam (+5 BTK)</button>
-      <button class="btn btn-pi" id="piLoginBtn" onclick="authenticatePiUser()">Pi ile Giriş Yap</button>
+      <span><strong id="tk">10</strong> BTK</span>
+      <button class="btn b-ad" id="adB" onclick="watchAd()">📺 +5 BTK</button>
+      <button class="btn b-pi" id="piB" onclick="authPi()">Pi Giriş</button>
     </div>
   </div>
 
-  <div id="menuScreen" class="menu-box">
+  <div id="menu" class="box">
     <h2>Oyun Modu Seçin</h2>
-    <p style="color:#ccc; font-size:14px;">Başlangıç Puanı: <strong>-100</strong> | 100 Puana ulaşan kazanır!</p>
-    <div class="mode-cards">
-      <div class="mode-card">
-        <h3>🤖 Tek Kişilik (Botlu)</h3>
-        <p style="font-size:13px; color:#bbb;">3 akıllı yapay zeka botuna karşı anında oyna.</p>
-        <button class="btn btn-pi" style="width:100%;" onclick="startSinglePlayer()">Botlarla Oyna (Ücretsiz)</button>
-      </div>
-
-      <div class="mode-card">
-        <h3>🌐 Online Masa</h3>
-        <p style="font-size:13px; color:#bbb;">Oda kodu kur veya arkadaşının odasına katıl (Giriş: 2 BTK).</p>
-        <input type="text" id="roomCodeInput" class="room-input" placeholder="Oda Kodu (Örn: 1001)" maxlength="8">
-        <br>
-        <button class="btn btn-online" style="width:100%; margin-top:8px;" onclick="joinOnlineRoom()">Masaya Otur (2 BTK)</button>
-      </div>
+    <p style="font-size:13px;color:#ccc">Başlangıç: -100 | 100 Puana ulaşan kazanır</p>
+    <button class="btn b-pi" style="width:90%;padding:14px;font-size:15px" onclick="startSingle()">🤖 Tek Kişilik (3 Botla Oyna - Ücretsiz)</button>
+    <hr style="border-color:#59357a;margin:16px 0">
+    <div>
+      <input id="rCode" placeholder="Oda Kodu (1001)" maxlength="6">
+      <button class="btn b-on" onclick="joinOnline()">🌐 Online Masa (2 BTK)</button>
     </div>
   </div>
 
-  <div id="gameScreen" style="display:none;">
-    <div class="scoreboard" id="playersContainer"></div>
-
-    <div class="game-arena">
-      <div class="status-bar" id="statusText">Hazırlanıyor...</div>
-      <div id="bidPanel" style="display:none; margin:8px 0;"></div>
-      <div class="trick-table" id="trickTable"></div>
+  <div id="game" style="display:none">
+    <div class="grid" id="pBox"></div>
+    <div class="arena">
+      <div class="status" id="st">Hazır</div>
+      <div id="bidP" style="display:none;margin-bottom:8px"></div>
+      <div class="table" id="tbl"></div>
     </div>
-
-    <div class="hand-area">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-        <strong id="modeBadge">Mod: Tek Kişilik</strong>
+    <div class="box">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <strong id="mBadge">Tek Kişilik</strong>
         <div>
-          <button class="btn btn-pi" onclick="startNewHand()">Yeni El Dağıt</button>
-          <button class="btn" onclick="resetFullGame()">Skoru Sıfırla</button>
-          <button class="btn btn-danger" onclick="backToMenu()">Ana Menü</button>
+          <button class="btn b-pi" onclick="newHand()">Yeni El</button>
+          <button class="btn" onclick="resetAll()">Sıfırla</button>
+          <button class="btn b-red" onclick="goMenu()">Menü</button>
         </div>
       </div>
-      <div class="my-cards" id="myHand"></div>
+      <div class="cards" id="hand"></div>
     </div>
   </div>
 
   <script>
-    let tokens = 10;
-    let piUser = null;
-    let piSessionToken = null;
-    let piInitialized = false;
-    let myUserName = "Sen (Pi Oyuncusu)";
+    let tokens=10, piInit=false, myName="Sen", mode="SINGLE", ch=null, seat=0, players=[], trump="S", turn=0, trick=[], state="IDLE", maxBid=4, bidder=-1;
+    const SUITS=[{id:"S",s:"♠",n:"Maça",c:""},{id:"H",s:"♥",n:"Kupa",c:"red"},{id:"C",s:"♣",n:"Sinek",c:""},{id:"D",s:"♦",n:"Karo",c:"red"}];
+    const RANKS=[{v:2,l:"2"},{v:3,l:"3"},{v:4,l:"4"},{v:5,l:"5"},{v:6,l:"6"},{v:7,l:"7"},{v:8,l:"8"},{v:9,l:"9"},{v:10,l:"10"},{v:11,l:"J"},{v:12,l:"Q"},{v:13,l:"K"},{v:14,l:"A"}];
 
-    const SUITS = new Array(
-      { id: 'S', symbol: '♠', name: 'Maça', color: 'black' },
-      { id: 'H', symbol: '♥', name: 'Kupa', color: 'red' },
-      { id: 'C', symbol: '♣', name: 'Sinek', color: 'black' },
-      { id: 'D', symbol: '♦', name: 'Karo', color: 'red' }
-    );
-    const RANKS = new Array(
-      { v: 2, label: '2' }, { v: 3, label: '3' }, { v: 4, label: '4' },
-      { v: 5, label: '5' }, { v: 6, label: '6' }, { v: 7, label: '7' },
-      { v: 8, label: '8' }, { v: 9, label: '9' }, { v: 10, label: '10' },
-      { v: 11, label: 'J' }, { v: 12, label: 'Q' }, { v: 13, label: 'K' },
-      { v: 14, label: 'A' }
-    );
-
-    let gameMode = 'SINGLE';
-    let onlineChannel = null;
-    let mySeatIndex = 0;
-
-    let players = new Array();
-    let trumpSuit = 'S';
-    let currentTurn = 0;
-    let trickCards = new Array();
-    let gameState = 'IDLE';
-    let highestBid = 4;
-    let bidderIndex = -1;
-
-    async function initPiSdk() {
-      if (!piInitialized && window.Pi) {
-        await window.Pi.init({ version: "2.0" });
-        piInitialized = true;
-      }
+    async function initPi(){if(!piInit&&window.Pi){await window.Pi.init({version:"2.0"});piInit=true;}}
+    async function authPi(){
+      try{
+        await initPi();
+        const a=await window.Pi.authenticate(["username"],()=>{});
+        const r=await fetch("https://piappengine.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accessToken:a.accessToken})});
+        if(r.ok){const d=await r.json();myName="@"+d.user.username;document.getElementById("piB").innerText=myName;document.getElementById("piB").disabled=true;if(players[seat]){players[seat].name=myName;renderP();}}
+      }catch(e){}
+    }
+    async function watchAd(){
+      const b=document.getElementById("adB");b.disabled=true;
+      try{
+        await initPi();
+        if(!(await window.Pi.Ads.isAdReady("rewarded")).ready) await window.Pi.Ads.requestAd("rewarded");
+        if((await window.Pi.Ads.showAd("rewarded")).result==="AD_REWARDED"){tokens+=5;document.getElementById("tk").innerText=tokens;alert("+5 BTK Kazandınız!");}
+      }catch(e){alert("Pi Browser gereklidir.");}
+      b.disabled=false;
     }
 
-    async function authenticatePiUser() {
-      try {
-        await initPiSdk();
-        const auth = await window.Pi.authenticate(new Array('username'), function() {});
-        const res = await fetch("https://piappengine.com", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ accessToken: auth.accessToken })
-        });
-        if (!res.ok) throw new Error("App Studio oturum doğrulaması başarısız.");
-        const sessionData = await res.json();
-        piSessionToken = sessionData.sessionToken;
-        piUser = sessionData.user;
-        myUserName = `@${piUser.username}`;
-        document.getElementById("piLoginBtn").innerText = myUserName;
-        document.getElementById("piLoginBtn").disabled = true;
-        if (players.at(mySeatIndex)) {
-          players.at(mySeatIndex).name = myUserName;
-          renderPlayers();
-        }
-      } catch (err) {
-        console.warn("Pi Auth bilgi:", err.message);
+    function goMenu(){if(ch){ch.close();ch=null;}state="IDLE";document.getElementById("game").style.display="none";document.getElementById("menu").style.display="block";}
+    function startSingle(){
+      mode="SINGLE";seat=0;
+      document.getElementById("menu").style.display="none";document.getElementById("game").style.display="block";
+      document.getElementById("mBadge").innerText="🤖 Botlu Mod";
+      players=[{name:myName,sc:-100,lg:0,h:[],tr:0,bd:0,bot:false},{name:"Bot Ahmet",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true},{name:"Bot Ayşe",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true},{name:"Bot Mehmet",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true}];
+      newHand();
+    }
+    function joinOnline(){
+      if(tokens<2)return alert("2 BTK gerekli!");
+      tokens-=2;document.getElementById("tk").innerText=tokens;
+      const code=document.getElementById("rCode").value.trim()||"1001";
+      mode="ONLINE";seat=0;
+      document.getElementById("menu").style.display="none";document.getElementById("game").style.display="block";
+      document.getElementById("mBadge").innerText="🌐 Oda #"+code;
+      players=[{name:myName,sc:-100,lg:0,h:[],tr:0,bd:0,bot:false},{name:"Bot #1",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true},{name:"Bot #2",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true},{name:"Bot #3",sc:-100,lg:0,h:[],tr:0,bd:0,bot:true}];
+      if("BroadcastChannel"in window){ch=new BroadcastChannel("btk_"+code);ch.onmessage=e=>{if(e.data.t==="SYNC"){players=e.data.p;trump=e.data.tr;turn=e.data.tn;trick=e.data.tk;state=e.data.st;renderAll();}};}
+      newHand();
+    }
+    function sync(){if(mode==="ONLINE"&&ch)ch.postMessage({t:"SYNC",p:players,tr:trump,tn:turn,tk:trick,st:state});}
+
+    function newHand(){
+      let deck=[];SUITS.forEach(s=>RANKS.forEach(r=>deck.push({suit:s.id,sym:s.s,c:s.c,v:r.v,l:r.l})));
+      for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+      const ord={S:0,H:1,C:2,D:3};
+      players.forEach((p,i)=>{p.h=deck.slice(i*13,(i+1)*13).sort((a,b)=>ord[a.suit]-ord[b.suit]||b.v-a.v);p.tr=0;p.bd=0;});
+      trick=[];maxBid=4;bidder=-1;state="BID";renderAll();
+      document.getElementById("st").innerText="İhale: Kaç el alırsınız?";
+      const bp=document.getElementById("bidP");bp.style.display="block";
+      bp.innerHTML=[5,6,7,8,9,10].map(n=>`<button class="btn b-pi" onclick="setBid(${n})">${n}</button>`).join("")+`<button class="btn" onclick="setBid(0)">Pas</button>`;
+    }
+    function setBid(ub){
+      document.getElementById("bidP").style.display="none";
+      let bids=[0,0,0,0];bids[seat]=ub;
+      for(let i=0;i<4;i++){if(i===seat)continue;let est=Math.min(9,Math.floor(players[i].h.filter(c=>c.suit==="S").length*.6+players[i].h.filter(c=>c.v===14).length*1.1));let m=Math.max(...bids);bids[i]=(est>m&&est>=5)?m+1:0;}
+      let mb=Math.max(...bids);bidder=mb<5?seat:bids.indexOf(mb);maxBid=mb<5?5:mb;players[bidder].bd=maxBid;
+      if(bidder===seat){
+        document.getElementById("st").innerText="İhale Sizde ("+maxBid+")! Koz Seçin:";
+        const bp=document.getElementById("bidP");bp.style.display="block";
+        bp.innerHTML=SUITS.map(s=>`<button class="btn b-pi" onclick="setTrump('${s.id}')">${s.s} ${s.n}</button>`).join("");
+      }else{
+        let cnt={S:0,H:0,C:0,D:0};players[bidder].h.forEach(c=>cnt[c.suit]++);
+        trump=Object.keys(cnt).reduce((a,b)=>cnt[a]>cnt[b]?a:b);startPlay();
       }
     }
-
-    async function watchPiRewardedAd() {
-      const adBtn = document.getElementById("adBtn");
-      adBtn.disabled = true;
-      adBtn.innerText = "Kontrol Ediliyor...";
-      try {
-        await initPiSdk();
-        const isAdReady = await window.Pi.Ads.isAdReady("rewarded");
-        if (!isAdReady.ready) {
-          const req = await window.Pi.Ads.requestAd("rewarded");
-          if (req.result !== "AD_LOADED") throw new Error("Reklam bulunamadı.");
-        }
-        const show = await window.Pi.Ads.showAd("rewarded");
-        if (show.result === "AD_REWARDED") {
-          tokens += 5;
-          document.getElementById("tokenBalance").innerText = tokens;
-          alert("Reklam tamamlandı! +5 BTK Token kazandınız.");
-        }
+    function setTrump(s){trump=s;document.getElementById("bidP").style.display="none";startPlay();}
+    function startPlay(){
+      state="PLAY";turn=bidder;const t=SUITS.find(x=>x.id===trump);
+      document.getElementById("st").innerText=`İhale: ${players[bidder].name} (${maxBid}) | Koz: ${t.s} ${t.n}`;
+      renderAll();sync();if(players[turn].bot)setTimeout(botPlay,600);
+    }
+    function valid(h,c){
+      if(!trick.length)return true;const ls=trick[0].c.suit;
+      if(h.some(x=>x.suit===ls))return c.suit===ls;
+      if(h.some(x=>x.suit===trump))return c.suit===trump;
+      return true;
+    }
+    function botPlay(){
+      if(state!=="PLAY"||!players[turn].bot)return;
+      const h=players[turn].h,v=h.filter(c=>valid(h,c)).sort((a,b)=>b.v-a.v);
+      play(turn,h.indexOf(v[0]));
+    }
+    function play(pi,ci){
+      const c=players[pi].h.splice(ci,1)[0];trick.push({pi,c});renderAll();sync();
+      if(trick.length===4)setTimeout(endTrick,800);
+      else{turn=(turn+1)%4;renderAll();if(players[turn].bot)setTimeout(botPlay,550);}
+    }
+    function endTrick(){
+      const ls=trick[0].c.suit;let w=trick[0];
